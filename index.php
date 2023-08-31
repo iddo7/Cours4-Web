@@ -9,16 +9,53 @@
 </head>
 <body>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-6">
+        <div class="row">
+            <div class="col-6 mb-4 mt-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="https://hdmusic.cc/uploads/posts/2022-12/1670058726_cover.jpg" class="card-img-top" alt="">
+                    <img src="https://hdmusic.cc/uploads/posts/2022-12/1670058726_cover.jpg" class="card-img-top p-3" alt="">
                     <div class="card-body">
                         <h4 class="card-title">hyponchodriac</h4>
                         <p class="card-text">brakence</p>
                         <p class="card-text">2022-12-02 - 11 chansons</p>
                     </div>
                 </div>
+            </div>
+            <div class="col-6 mb-4 mt-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="https://hdmusic.cc/uploads/posts/2022-12/1670058726_cover.jpg" class="card-img-top p-3" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">hyponchodriac</h4>
+                        <p class="card-text">brakence</p>
+                        <p class="card-text">2022-12-02 - 11 chansons</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mb-4 mt-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="https://hdmusic.cc/uploads/posts/2022-12/1670058726_cover.jpg" class="card-img-top p-3" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">hyponchodriac</h4>
+                        <p class="card-text">brakence</p>
+                        <p class="card-text">2022-12-02 - 11 chansons</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mb-4 mt-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="https://hdmusic.cc/uploads/posts/2022-12/1670058726_cover.jpg" class="card-img-top p-3" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">hyponchodriac</h4>
+                        <p class="card-text">brakence</p>
+                        <p class="card-text">2022-12-02 - 11 chansons</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <a href="ajouter.php">
+                    <button class="btn btn-primary">Ajouter</button>
+                </a>
             </div>
         </div>
     </div>
