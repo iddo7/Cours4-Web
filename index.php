@@ -20,51 +20,37 @@
     if ($connection->connect_error) {
         die("Connection failed: " . $connection->connect_error);
     }
+
+
+    $connection->query('SET NAMES utf8');
+
+    $selectAllQuery = "SELECT * FROM albums";
+    $result = $connection->query($selectAllQuery);
+    if ($result->num_rows <= 0) {
+        echo "0 results";
+    }
 ?>
 
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-6 mb-4 mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://hdmusic.cc/uploads/posts/2022-12/1670058726_cover.jpg" class="card-img-top p-3" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">hyponchodriac</h4>
-                        <p class="card-text">brakence</p>
-                        <p class="card-text">2022-12-02 - 11 chansons</p>
+            <?php 
+                while($row = $result->fetch_assoc()) {
+                    ?>
+                    <div class="col-6 d-flex justify-content-center mb-4 mt-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="<?php echo $row["img"]; ?>" class="card-img-top p-3" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title"><?php echo $row["nom"]; ?></h4>
+                                <p class="card-text"><?php echo $row["artiste"]; ?></p>
+                                <p class="card-text"><?php echo $row["dateDeSortie"] . " - " . $row["nmbDePistes"]; ?> chansons</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-6 mb-4 mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://hdmusic.cc/uploads/posts/2022-12/1670058726_cover.jpg" class="card-img-top p-3" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">hyponchodriac</h4>
-                        <p class="card-text">brakence</p>
-                        <p class="card-text">2022-12-02 - 11 chansons</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 mb-4 mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://hdmusic.cc/uploads/posts/2022-12/1670058726_cover.jpg" class="card-img-top p-3" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">hyponchodriac</h4>
-                        <p class="card-text">brakence</p>
-                        <p class="card-text">2022-12-02 - 11 chansons</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 mb-4 mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://hdmusic.cc/uploads/posts/2022-12/1670058726_cover.jpg" class="card-img-top p-3" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">hyponchodriac</h4>
-                        <p class="card-text">brakence</p>
-                        <p class="card-text">2022-12-02 - 11 chansons</p>
-                    </div>
-                </div>
-            </div>
+
+                    <?php
+                }
+            ?>
         </div>
         <div class="row">
             <div class="col">
