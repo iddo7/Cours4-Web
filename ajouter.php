@@ -9,10 +9,17 @@
 </head>
 <body>
     <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <a href="index.php">
+                    <button class="btn btn-light"><--</button>
+                </a>
+            </div>
+        </div>
         <div class="row justify-content-center mt-5">
             <div class="col-8">
                 <form action="">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Nom" value="">
+                    <input type="text" class="form-control" name="albumName" id="albumName" placeholder="Nom de l'album" value="">
                     <input type="text" class="form-control" name="artist" id="artist" placeholder="Artiste" value="">
                     <input type="text" class="form-control" name="image" id="image" placeholder="Image" value="">
                     <input type="text" class="form-control" name="numberSongs" id="numberSongs" placeholder="Nombre de pistes" value="">
@@ -20,13 +27,6 @@
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <a href="index.php">
-                    <button class="btn btn-light"><--</button>
-                </a>
             </div>
         </div>
     </div>
