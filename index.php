@@ -7,6 +7,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Document</title>
 </head>
+<?php 
+    $servername = "localhost";
+    $username = "root";
+    $password = "root";
+    $db = "albums";
+
+    // Create connection
+    $connection = new mysqli($servername, $username, $password, $db);
+
+    // Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+?>
+
 <body>
     <div class="container">
         <div class="row">
