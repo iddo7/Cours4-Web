@@ -7,3 +7,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 15px 1px rgba(0,0,0,0.15);
 }
+
+.card-img-top {
+    border-radius: 30px;
+}

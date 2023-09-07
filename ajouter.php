@@ -8,6 +8,8 @@
     <title>Ajouter</title>
 </head>
 <?php 
+
+
     $valuesInputed = array(
         "albumName" => "",
         "artistName" => "",
@@ -36,7 +38,33 @@
         }
 
         if (!$errorOccured) {
-            $alertMessage = "L'ajout s'est bien produit";
+            $servername = "localhost";
+            $username = "root";
+            $password = "root";
+            $db = "albums";
+        
+            // Create connection
+            $connection = mysqli_connect($servername, $username, $password, $db);
+        
+            // Check connection
+            if (!$connection) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+            // $connection->query('SET NAMES utf8');
+
+            $insertQuery = "INSERT INTO albums (nom, img, artiste, nmbDePistes, dateDeSortie)" . " VALUES ('" . $valuesInputed['albumName'] . "','" . $valuesInputed['image'] . "','" . $valuesInputed['artistName'] . "'," . $valuesInputed['numberOfSongs'] . ",'" . $valuesInputed['releaseDate'] . "');";
+
+            echo $insertQuery;
+
+            if (mysqli_query($connection, $insertQuery)) {
+                $alertMessage = "L'ajout s'est bien produit";
+            }
+            else {
+                $alertMessage = "Erreur : " . mysqli_error($connection);
+            }
+
+            mysqli_close($connection);
+
         }
     }
 
