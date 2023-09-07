@@ -47,7 +47,7 @@
                                 <p class="card-text"><?php echo $row["artiste"]; ?></p>
                                 <p class="card-text"><?php echo $row["dateDeSortie"] . " - " . $row["nmbDePistes"]; ?> chansons</p>
 
-                                <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="modifier.php?id=<?php echo $row["id"]; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                                 <a href="supprimer.php?id=<?php echo $row["id"]; ?>"><i class="fa-solid fa-trash"></i></a>
                             </div>
                         </div>

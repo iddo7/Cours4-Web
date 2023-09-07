@@ -5,20 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Ajouter</title>
+    <title>Modifier</title>
 </head>
-<?php 
+<?php         
+    $servername = "localhost";
+    $username = "root";
+    $password = "root";
+    $db = "albums";
 
+    // Create connection
+    $connection = new mysqli($servername, $username, $password, $db);
 
-    $valuesInputed = array(
-        "albumName" => "",
-        "artistName" => "",
-        "image" => "",
-        "numberOfSongs" => "",
-        "releaseDate" => "",
-    );
+    // Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+
+    $selectAllQuery = "SELECT * FROM albums WHERE id=" . $_GET["id"];
+    $result = $connection->query($selectAllQuery);
+    if ($result->num_rows <= 0) {
+        echo "0 results";
+    }
+
+    while($row = $result->fetch_assoc()) {
+        $valuesInputed = array(
+            "albumName" => $row["nom"],
+            "artistName" => $row["artiste"],
+            "image" => $row["img"],
+            "numberOfSongs" => $row["nmbDePistes"],
+            "releaseDate" => $row["dateDeSortie"],
+        );
+    }
     $errorOccured = false;
     $alertMessage = '';
+
 
 
     // FORM WAS SUBMITTED
@@ -50,16 +70,20 @@
                 die("Connection failed: " . mysqli_connect_error());
             }
 
-            $insertQuery = "INSERT INTO albums (nom, img, artiste, nmbDePistes, dateDeSortie)" . " VALUES ('" . $valuesInputed['albumName'] . "','" . $valuesInputed['image'] . "','" . $valuesInputed['artistName'] . "'," . $valuesInputed['numberOfSongs'] . ",'" . $valuesInputed['releaseDate'] . "');";
+            $updateQuery = "UPDATE albums SET " . "nom='" . $valuesInputed['albumName'] . "'," . "img='" . $valuesInputed['image'] . "'," . "artiste='" . $valuesInputed['artistName'] . "'," . "nmbDePistes='" . $valuesInputed['numberOfSongs'] . "'," . "dateDeSortie='" . $valuesInputed['releaseDate'] . "' WHERE id=" . $_GET["id"];
+            echo $updateQuery;
 
-            if (mysqli_query($connection, $insertQuery)) {
+            /*
+            if ($connection->query($updateQuery) === TRUE) {
                 $alertMessage = "L'ajout s'est bien produit";
                 header("Location: index.php");
                 exit;
             }
             else {
-                $alertMessage = "Erreur : " . mysqli_error($connection);
+                $alertMessage = "Erreur updating record : " . $connection->error;
+                $errorOccured = true;
             }
+            */
 
             mysqli_close($connection);
 
@@ -118,6 +142,8 @@
 
                             <input type="date" class="form-control" name="releaseDate" id="releaseDate" placeholder="Date de sortie" 
                                 value="<?php echo $valuesInputed['releaseDate'];?>">
+
+                            <input type="hidden" id="hiddenId" name="hiddenId" value="<?php echo $_GET["id"];?>">
 
                             <p class="text-<?php echo $errorOccured == true ? "danger" : "success" ?>">
                                 <?php echo $alertMessage; ?>
