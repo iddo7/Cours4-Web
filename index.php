@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Document</title>
 </head>
 <?php 
@@ -45,6 +46,8 @@
                                 <h4 class="card-title"><?php echo $row["nom"]; ?></h4>
                                 <p class="card-text"><?php echo $row["artiste"]; ?></p>
                                 <p class="card-text"><?php echo $row["dateDeSortie"] . " - " . $row["nmbDePistes"]; ?> chansons</p>
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-trash"></i>
                             </div>
                         </div>
                     </div>
