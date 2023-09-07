@@ -56,6 +56,8 @@
 
             if (mysqli_query($connection, $insertQuery)) {
                 $alertMessage = "L'ajout s'est bien produit";
+                header("Location: index.php");
+                exit;
             }
             else {
                 $alertMessage = "Erreur : " . mysqli_error($connection);
@@ -100,7 +102,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-8">
                 <?php 
-                    if ($_SERVER['REQUEST_METHOD'] != 'POST' || $errorOccured == true || $errorOccured == false) {
+                    if ($_SERVER['REQUEST_METHOD'] != 'POST' || $errorOccured == true) {
                 ?>
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
 

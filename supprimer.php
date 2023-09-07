@@ -32,7 +32,7 @@
     }
     $connection->close();
 
-    header("localhost/Cours4-Web/index.php");
+    header("Location: index.php");
     exit;
 ?>
 <body>

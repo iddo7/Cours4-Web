@@ -34,7 +34,7 @@
 ?>
 
 <body>
-    <div class="container">
+    <div class="container col-6">
         <div class="row">
             <?php 
                 while($row = $result->fetch_assoc()) {
