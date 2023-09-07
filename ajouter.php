@@ -54,8 +54,6 @@
 
             $insertQuery = "INSERT INTO albums (nom, img, artiste, nmbDePistes, dateDeSortie)" . " VALUES ('" . $valuesInputed['albumName'] . "','" . $valuesInputed['image'] . "','" . $valuesInputed['artistName'] . "'," . $valuesInputed['numberOfSongs'] . ",'" . $valuesInputed['releaseDate'] . "');";
 
-            echo $insertQuery;
-
             if (mysqli_query($connection, $insertQuery)) {
                 $alertMessage = "L'ajout s'est bien produit";
             }
