@@ -16,7 +16,7 @@
         "releaseDate" => "",
     );
     $errorOccured = false;
-    $errorEmpty = '';
+    $alertMessage = '';
 
 
     // FORM WAS SUBMITTED
@@ -26,7 +26,7 @@
 
         if (anyIsEmpty($inputs)) {
             $errorOccured = true;
-            $errorEmpty = 'Tous les champs doivent être remplis';
+            $alertMessage = 'Tous les champs doivent être remplis';
         }
         // ADD ISET() to optionGender and check if value is exactly the one we want
 
@@ -36,9 +36,7 @@
         }
 
         if (!$errorOccured) {
-            foreach($valuesInputed as $value) {
-                echo $value;
-            }
+            $alertMessage = "L'ajout s'est bien produit";
         }
     }
 
@@ -76,7 +74,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-8">
                 <?php 
-                    if ($_SERVER['REQUEST_METHOD'] != 'POST' || $errorOccured == true) {
+                    if ($_SERVER['REQUEST_METHOD'] != 'POST' || $errorOccured == true || $errorOccured == false) {
                 ?>
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
 
@@ -89,18 +87,14 @@
                             <input type="text" class="form-control" name="image" id="image" placeholder="Image" 
                                 value="<?php echo $valuesInputed['image'];?>">
 
-                            <input type="text" class="form-control" name="numberOfSongs" id="numberOfSongs" placeholder="Nombre de pistes" 
+                            <input type="number" class="form-control" name="numberOfSongs" id="numberOfSongs" placeholder="Nombre de pistes" 
                                 value="<?php echo $valuesInputed['numberOfSongs'];?>">
 
                             <input type="date" class="form-control" name="releaseDate" id="releaseDate" placeholder="Date de sortie" 
                                 value="<?php echo $valuesInputed['releaseDate'];?>">
 
-                            <p class="text-danger">
-                                <?php 
-                                    if ($errorOccured) {
-                                        echo $errorEmpty;
-                                    }
-                                ?>
+                            <p class="text-<?php echo $errorOccured == true ? "danger" : "success" ?>">
+                                <?php echo $alertMessage; ?>
                             </p>
 
                             <button type="submit" class="btn btn-primary">Submit</button>
