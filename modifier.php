@@ -8,37 +8,38 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Modifier</title>
 </head>
-<?php     
+<?php
+function anyIsEmpty($arrayOfInputs) {
+    $result = false;
+    foreach ($arrayOfInputs as $input) {
+        if (empty($_POST[$input])) {
+            $result = true;
+            break;
+        }
+    }
+
+    return $result;
+}
+
+function trojan($data){
+    $data = trim($data); //Enleve les caractères invisibles
+    $data = addslashes($data); //Mets des backslashs devant les ' et les  "
+    $data = htmlspecialchars($data); // Remplace les caractères spéciaux par leurs symboles comme ­< devient &lt;
+    
+    return $data;
+}
+
+
 if ($_SESSION["connexion"] == true) {
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
-    $db = "cours4";
 
-    // Create connection
-    $connection = new mysqli($servername, $username, $password, $db);
-
-    // Check connection
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
-
-    $selectAllQuery = "SELECT * FROM albums WHERE id=" . $_GET["id"];
-    $result = $connection->query($selectAllQuery);
-    if ($result->num_rows <= 0) {
-        echo "0 results";
-    }
-
-    while($row = $result->fetch_assoc()) {
-        $valuesInputed = array(
-            "albumName" => $row["nom"],
-            "artistName" => $row["artiste"],
-            "image" => $row["img"],
-            "numberOfSongs" => $row["nmbDePistes"],
-            "releaseDate" => $row["dateDeSortie"],
-        );
-    }
+    $valuesInputed = array(
+        "albumName" => "",
+        "artistName" => "",
+        "image" => "",
+        "numberOfSongs" => "",
+        "releaseDate" => "",
+    );
     $errorOccured = false;
     $alertMessage = '';
 
@@ -63,7 +64,7 @@ if ($_SESSION["connexion"] == true) {
             $servername = "localhost";
             $username = "root";
             $password = "root";
-            $db = "albums";
+            $db = "cours4";
         
             // Create connection
             $connection = mysqli_connect($servername, $username, $password, $db);
@@ -73,10 +74,9 @@ if ($_SESSION["connexion"] == true) {
                 die("Connection failed: " . mysqli_connect_error());
             }
 
-            $updateQuery = "UPDATE albums SET " . "nom='" . $valuesInputed['albumName'] . "'," . "img='" . $valuesInputed['image'] . "'," . "artiste='" . $valuesInputed['artistName'] . "'," . "nmbDePistes='" . $valuesInputed['numberOfSongs'] . "'," . "dateDeSortie='" . $valuesInputed['releaseDate'] . "' WHERE id=" . $_GET["id"];
-            echo $updateQuery;
+            $albumId = isset($_GET["id"]) ? $_GET["id"] : $_POST["hiddenId"];
+            $updateQuery = "UPDATE albums SET " . "nom='" . $valuesInputed['albumName'] . "'," . "img='" . $valuesInputed['image'] . "'," . "artiste='" . $valuesInputed['artistName'] . "'," . "nmbDePistes='" . $valuesInputed['numberOfSongs'] . "'," . "dateDeSortie='" . $valuesInputed['releaseDate'] . "' WHERE id=" . $albumId;
 
-            /*
             if ($connection->query($updateQuery) === TRUE) {
                 $alertMessage = "L'ajout s'est bien produit";
                 header("Location: index.php");
@@ -86,33 +86,12 @@ if ($_SESSION["connexion"] == true) {
                 $alertMessage = "Erreur updating record : " . $connection->error;
                 $errorOccured = true;
             }
-            */
 
             mysqli_close($connection);
 
         }
     }
 
-    
-    function anyIsEmpty($arrayOfInputs) {
-        $result = false;
-        foreach ($arrayOfInputs as $input) {
-            if (empty($_POST[$input])) {
-                $result = true;
-                break;
-            }
-        }
-
-        return $result;
-    }
-
-    function trojan($data){
-        $data = trim($data); //Enleve les caractères invisibles
-        $data = addslashes($data); //Mets des backslashs devant les ' et les  "
-        $data = htmlspecialchars($data); // Remplace les caractères spéciaux par leurs symboles comme ­< devient &lt;
-        
-        return $data;
-    }
 
 ?>
 <body>
@@ -128,6 +107,38 @@ if ($_SESSION["connexion"] == true) {
             <div class="col-8">
                 <?php 
                     if ($_SERVER['REQUEST_METHOD'] != 'POST' || $errorOccured == true) {
+
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "root";
+                        $db = "cours4";
+                    
+                        // Create connection
+                        $connection = new mysqli($servername, $username, $password, $db);
+                    
+                        // Check connection
+                        if ($connection->connect_error) {
+                            die("Connection failed: " . $connection->connect_error);
+                        }
+                    
+                        $albumId = isset($_GET["id"]) ? $_GET["id"] : $_POST["hiddenId"];
+                        $selectAllQuery = "SELECT * FROM albums WHERE id=" . $albumId;
+                        $result = $connection->query($selectAllQuery);
+                        if ($result->num_rows <= 0) {
+                            echo "0 results";
+                        }
+                    
+                        while($row = $result->fetch_assoc()) {
+                            $valuesInputed = array(
+                                "albumName" => $row["nom"],
+                                "artistName" => $row["artiste"],
+                                "image" => $row["img"],
+                                "numberOfSongs" => $row["nmbDePistes"],
+                                "releaseDate" => $row["dateDeSortie"],
+                            );
+                        }
+                        $errorOccured = false;
+                        $alertMessage = '';
                 ?>
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
 

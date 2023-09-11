@@ -9,6 +9,27 @@
     <title>Home</title>
 </head>
 <?php 
+
+function anyIsEmpty($arrayOfInputs) {
+    $result = false;
+    foreach ($arrayOfInputs as $input) {
+        if (empty($_POST[$input])) {
+            $result = true;
+            break;
+        }
+    }
+
+    return $result;
+}
+
+function trojan($data){
+    $data = trim($data); //Enleve les caractères invisibles
+    $data = addslashes($data); //Mets des backslashs devant les ' et les  "
+    $data = htmlspecialchars($data); // Remplace les caractères spéciaux par leurs symboles comme ­< devient &lt;
+    
+    return $data;
+}
+
 if ($_SESSION["connexion"] == true) {
 
 
@@ -67,28 +88,6 @@ if ($_SESSION["connexion"] == true) {
 
         }
     }
-
-    
-    function anyIsEmpty($arrayOfInputs) {
-        $result = false;
-        foreach ($arrayOfInputs as $input) {
-            if (empty($_POST[$input])) {
-                $result = true;
-                break;
-            }
-        }
-
-        return $result;
-    }
-
-    function trojan($data){
-        $data = trim($data); //Enleve les caractères invisibles
-        $data = addslashes($data); //Mets des backslashs devant les ' et les  "
-        $data = htmlspecialchars($data); // Remplace les caractères spéciaux par leurs symboles comme ­< devient &lt;
-        
-        return $data;
-    }
-
 ?>
 <body>
     <div class="container">
