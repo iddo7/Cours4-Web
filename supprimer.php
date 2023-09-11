@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,8 @@
     <title>Suppression</title>
 </head>
 <?php 
+if ($_SESSION["connexion"] == true) {
+
     $servername = 'localhost';
     $username = 'root';
     $password = 'root';
@@ -37,4 +40,11 @@
 ?>
 <body>
 </body>
+<?php 
+}
+else {
+    header("Location: login.php");
+    exit;
+}
+?>
 </html>

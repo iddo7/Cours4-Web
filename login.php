@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +34,38 @@
         }
 
         if (!$errorOccured) {
+            $username = $_POST['username'];
+            $password = md5($_POST['password'], false);
 
+            $servername = "localhost";
+            $usernameDB = "root";
+            $passwordDB = "root";
+            $db = "cours4";
+
+            // Create connection
+            $connection = new mysqli($servername, $usernameDB, $passwordDB, $db);
+            // Check connection
+            if ($connection->connect_error) {
+                die("Connection failed: " . $connection->connect_error);
+            }
+
+            $selectUserQuery = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+            $result = $connection->query($selectUserQuery);
+
+            if ($result->num_rows > 0) {
+                // Connected
+                $row = $result->fetch_assoc();
+                $_SESSION["connexion"] = true;
+                
+                header("Location: index.php");
+                exit;
+            }
+            else {
+                $errorOccured = true;
+                $alertMessage = "Le nom d'usager et le mot de passe ne correspondent pas!";
+            }
+
+        $connection->close();
         }
     }
 
@@ -69,11 +101,11 @@
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" class="">
 
                     <input type="text" class="form-control mb-3" name="username" id="username" placeholder="Nom d'usager" 
-                        value="">
+                        value="<?php echo $valuesInputed['username']; ?>">
 
                     <input type="password" class="form-control mb-3" name="password" id="password" placeholder="Mot de passe" 
-                        value="">
-                        
+                        value="<?php echo $valuesInputed['password']; ?>">
+
                     <p class="text-<?php echo $errorOccured == true ? "danger" : "success" ?>">
                         <?php echo $alertMessage; ?>
                     </p>
