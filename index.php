@@ -75,10 +75,10 @@ if ($_SESSION["connexion"] == true) {
                 }
             ?>
         </div>
-        <div class="row">
-            <div class="col">
+        <div class="row m-5">
+            <div class="col d-flex justify-content-center">
                 <a href="ajouter.php">
-                    <button class="btn btn-primary">Ajouter</button>
+                    <button class="btn btn-secondary">Ajouter</button>
                 </a>
             </div>
         </div>
