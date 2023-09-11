@@ -13,7 +13,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "root";
-    $db = "albums";
+    $db = "cours4";
 
     // Create connection
     $connection = new mysqli($servername, $username, $password, $db);

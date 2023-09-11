@@ -40,7 +40,7 @@
             $servername = "localhost";
             $username = "root";
             $password = "root";
-            $db = "albums";
+            $db = "cours4";
         
             // Create connection
             $connection = mysqli_connect($servername, $username, $password, $db);
